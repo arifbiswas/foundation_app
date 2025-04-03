@@ -12,8 +12,8 @@ import {
 } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import tw from "../utils/tw";
-import { t, tObj } from "../utils/i18n";
+import tw from "@/utils/tw";
+import { t, tObj } from "@/utils/i18n";
 
 // Get membership interests from translations or use fallback
 interface InterestItem {

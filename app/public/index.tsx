@@ -14,8 +14,8 @@ import { Ionicons, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-ico
 import { LinearGradient } from 'expo-linear-gradient';
 import Marquee from 'react-native-marquee';
 import { router } from 'expo-router';
-import tw from '../utils/tw';
-import { t, tObj } from "../utils/i18n";
+import tw from '@/utils/tw';
+import { t, tObj } from "@/utils/i18n";
 
 const { width } = Dimensions.get('window');
 
@@ -36,16 +36,16 @@ interface GridItem {
 
 // Enhanced carousel data with more images from the gallery directory
 const carouselData: CarouselItem[] = [
-  { id: '1', image: require('../assets/images/gallery/gallery (1).jpg') },
-  { id: '2', image: require('../assets/images/gallery/gallery (8).jpg') },
-  { id: '3', image: require('../assets/images/gallery/gallery (9).jpg') },
-  { id: '4', image: require('../assets/images/gallery/gallery (11).jpg') },
-  { id: '5', image: require('../assets/images/gallery/gallery (13).jpg') },
-  { id: '6', image: require('../assets/images/gallery/gallery (3).jpeg') },
-  { id: '7', image: require('../assets/images/gallery/gallery (10).jpeg') },
-  { id: '8', image: require('../assets/images/gallery/gallery (15).jpeg') },
-  { id: '9', image: require('../assets/images/gallery/gallery (25).jpeg') },
-  { id: '10', image: require('../assets/images/gallery/gallery (31).jpeg') },
+  { id: '1', image: require('@/assets/images/gallery/gallery (1).jpg') },
+  { id: '2', image: require('@/assets/images/gallery/gallery (8).jpg') },
+  { id: '3', image: require('@/assets/images/gallery/gallery (9).jpg') },
+  { id: '4', image: require('@/assets/images/gallery/gallery (11).jpg') },
+  { id: '5', image: require('@/assets/images/gallery/gallery (13).jpg') },
+  { id: '6', image: require('@/assets/images/gallery/gallery (3).jpeg') },
+  { id: '7', image: require('@/assets/images/gallery/gallery (10).jpeg') },
+  { id: '8', image: require('@/assets/images/gallery/gallery (15).jpeg') },
+  { id: '9', image: require('@/assets/images/gallery/gallery (25).jpeg') },
+  { id: '10', image: require('@/assets/images/gallery/gallery (31).jpeg') },
 ];
 
 // Convert grid items from translation
@@ -66,7 +66,7 @@ const gridData: GridItem[] = Array.isArray(translatedGridItems) ?
       icon: 'hand-holding-heart', 
       iconType: 'FontAwesome5', 
       color: 'primary',
-      customIcon: require('../assets/icons/foundation.png')
+      customIcon: require('@/assets/icons/foundation.png')
     },
     { 
       id: '2', 
@@ -74,7 +74,7 @@ const gridData: GridItem[] = Array.isArray(translatedGridItems) ?
       icon: 'images', 
       iconType: 'FontAwesome5', 
       color: 'primary',
-      customIcon: require('../assets/icons/gallery.png')
+      customIcon: require('@/assets/icons/gallery.png')
     },
     { 
       id: '3', 
@@ -82,7 +82,7 @@ const gridData: GridItem[] = Array.isArray(translatedGridItems) ?
       icon: 'landmark', 
       iconType: 'FontAwesome5', 
       color: 'primary',
-      customIcon: require('../assets/icons/politics.png')
+      customIcon: require('@/assets/icons/politics.png')
     },
     { 
       id: '4', 
@@ -90,7 +90,7 @@ const gridData: GridItem[] = Array.isArray(translatedGridItems) ?
       icon: 'user', 
       iconType: 'FontAwesome5', 
       color: 'primary',
-      customIcon: require('../assets/icons/userInfo.png')
+      customIcon: require('@/assets/icons/userInfo.png')
     },
     { 
       id: '5', 
@@ -98,7 +98,7 @@ const gridData: GridItem[] = Array.isArray(translatedGridItems) ?
       icon: 'phone-alt', 
       iconType: 'FontAwesome5', 
       color: 'primary',
-      customIcon: require('../assets/icons/contact.png')
+      customIcon: require('@/assets/icons/contact.png')
     },
     { 
       id: '6', 
@@ -106,19 +106,19 @@ const gridData: GridItem[] = Array.isArray(translatedGridItems) ?
       icon: 'hands-helping', 
       iconType: 'FontAwesome5', 
       color: 'primary',
-      customIcon: require('../assets/icons/volunteer.png')
+      customIcon: require('@/assets/icons/volunteer.png')
     }
   ];
 
 // Helper function to get custom icon based on ID
 function getCustomIconForId(id: string) {
   switch(id) {
-    case '1': return require('../assets/icons/foundation.png');
-    case '2': return require('../assets/icons/gallery.png');
-    case '3': return require('../assets/icons/politics.png');
-    case '4': return require('../assets/icons/userInfo.png');
-    case '5': return require('../assets/icons/contact.png');
-    case '6': return require('../assets/icons/volunteer.png');
+    case '1': return require('@/assets/icons/foundation.png');
+    case '2': return require('@/assets/icons/gallery.png');
+    case '3': return require('@/assets/icons/politics.png');
+    case '4': return require('@/assets/icons/userInfo.png');
+    case '5': return require('@/assets/icons/contact.png');
+    case '6': return require('@/assets/icons/volunteer.png');
     default: return null;
   }
 }
@@ -194,22 +194,22 @@ export default function HomeScreen() {
   const handleGridItemPress = (item: GridItem) => {
     switch(item.id) {
       case '1': // Foundation
-        router.push('/about');
+        router.push('/public/about');
         break;
       case '2': // Gallery
-        router.push('/gallery');
+        router.push('/public/gallery');
         break;
       case '3': // Political Activities
-        router.push('/politics');
+        router.push('/public/politics');
         break;
       case '4': // My Information
-        router.push('/myinfo');
+        router.push('/public/myinfo');
         break;
       case '5': // Contact Us
-        router.push('/contact');
+        router.push('/public/contact');
         break;
       case '6': // Volunteer
-        router.push('/volunteer');
+        router.push('/public/volunteer');
         break;
       default:
         break;
@@ -252,7 +252,7 @@ export default function HomeScreen() {
       
       <ScrollView style={tw`flex-1 bg-neutral-100`} showsVerticalScrollIndicator={false}>
         {/* Announcement Bar with Marquee */}
-        <View style={tw`bg-primary py-4 flex-row items-center px-3`}>
+        {/* <View style={tw`bg-primary py-4 flex-row items-center px-3`}>
           <View style={tw`mr-3`}>
             <FontAwesome5 name="bullhorn" size={18} color="white" />
           </View>
@@ -269,12 +269,12 @@ export default function HomeScreen() {
               </Text>
             </Marquee>
           </View>
-        </View>
+        </View> */}
 
         {/* Carousel Section */}
         <View style={tw`w-full px-3 pt-4`}>
           <Carousel
-            width={width - 24}
+            width={width-20}
             height={carouselHeight}
             data={carouselData}
             renderItem={renderCarouselItem}
@@ -285,8 +285,8 @@ export default function HomeScreen() {
             onSnapToItem={setActiveIndex}
             mode="parallax"
             modeConfig={{
-              parallaxScrollingScale: 0.9,
-              parallaxScrollingOffset: 50,
+              parallaxScrollingScale: 1,
+              parallaxScrollingOffset: 0,
             }}
           />
           <View style={tw`flex-row justify-center my-3`}>

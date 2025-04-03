@@ -3,8 +3,8 @@ import { Text, View, ScrollView, Image, TouchableOpacity, Pressable } from "reac
 import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
-import tw from "../utils/tw";
-import { t, tObj } from "../utils/i18n";
+import tw from "@/utils/tw";
+import { t, tObj } from "@/utils/i18n";
 
 // Get foundation initiatives for helping the poor from translations
 const helpInitiativesData = tObj('about.helpingPoorSection.initiatives');
@@ -64,7 +64,7 @@ export default function About() {
           <View style={tw`p-5`}>
             <View style={tw`items-center`}>
               <Image 
-                source={require('../assets/images/profile.jpg')} 
+                source={require('@/assets/images/profile.jpg')} 
                 style={tw`w-32 h-32 rounded-full border-4 border-primary mb-4`}
               />
               <Text style={tw`text-2xl font-bold text-primary mb-1`}>{leaderName}</Text>

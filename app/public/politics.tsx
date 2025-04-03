@@ -9,8 +9,8 @@ import {
 } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import tw from "../utils/tw";
-import { t, tObj } from '../utils/i18n';
+import tw from "@/utils/tw";
+import { t, tObj } from '@/utils/i18n';
 
 // Political activities data with Bengali text
 const activities = [
@@ -94,7 +94,7 @@ export default function Politics() {
       date: 'জুন ১৫, ২০২৩', 
       location: 'শহীদ মিনার ময়দান, ঢাকা',
       time: 'বিকাল ৩:০০',
-      image: require('../assets/images/rallies/rally1.jpg') 
+      image: require('@/assets/images/rallies/rally1.jpg') 
     },
     { 
       id: '2',
@@ -102,7 +102,7 @@ export default function Politics() {
       date: 'জুলাই ১০, ২০২৩', 
       location: 'বাংলাদেশ শিল্পকলা একাডেমী',
       time: 'সকাল ১০:০০',
-      image: require('../assets/images/rallies/rally2.jpg') 
+      image: require('@/assets/images/rallies/rally2.jpg') 
     },
     { 
       id: '3',
@@ -110,7 +110,7 @@ export default function Politics() {
       date: 'আগস্ট ৫, ২০২৩', 
       location: 'গুলশান সম্প্রদায় কেন্দ্র',
       time: 'বিকাল ৪:৩০',
-      image: require('../assets/images/rallies/rally3.jpg') 
+      image: require('@/assets/images/rallies/rally3.jpg') 
     }
   ];
 
@@ -136,7 +136,7 @@ export default function Politics() {
         <View style={tw`mx-5 mb-6 bg-primary rounded-2xl shadow-xl`}>
           <View style={tw`p-5 items-center`}>
             <Image 
-              source={require('../assets/images/profile.jpg')} 
+              source={require('@/assets/images/profile.jpg')} 
               style={tw`w-32 h-32 rounded-full border-4 border-white mb-4`}
             />
             <Text style={tw`text-white text-2xl font-bold`}>মারুফ হাসান মাসুম</Text>

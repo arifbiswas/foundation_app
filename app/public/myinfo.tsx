@@ -8,8 +8,8 @@ import {
 } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import tw from "../utils/tw";
-import { t, tObj } from "../utils/i18n";
+import tw from "@/utils/tw";
+import { t, tObj } from "@/utils/i18n";
 
 // Define the GalleryItem interface to fix TypeScript error
 interface GalleryItem {
@@ -40,12 +40,12 @@ const personalInfo = {
 
 // Personal gallery
 const personalGallery: GalleryItem[] = [
-  { id: '1', image: require('../assets/images/gallery/gallery (1).jpg') },
-  { id: '2', image: require('../assets/images/gallery/gallery (8).jpg') },
-  { id: '3', image: require('../assets/images/gallery/gallery (9).jpg') },
-  { id: '4', image: require('../assets/images/gallery/gallery (10).jpg') },
-  { id: '5', image: require('../assets/images/gallery/gallery (11).jpg') },
-  { id: '6', image: require('../assets/images/gallery/gallery (1).jpeg') }
+  { id: '1', image: require('@/assets/images/gallery/gallery (1).jpg') },
+  { id: '2', image: require('@/assets/images/gallery/gallery (8).jpg') },
+  { id: '3', image: require('@/assets/images/gallery/gallery (9).jpg') },
+  { id: '4', image: require('@/assets/images/gallery/gallery (10).jpg') },
+  { id: '5', image: require('@/assets/images/gallery/gallery (11).jpg') },
+  { id: '6', image: require('@/assets/images/gallery/gallery (1).jpeg') }
 ];
 
 export default function MyInfo() {
@@ -85,7 +85,7 @@ export default function MyInfo() {
         <View style={tw`mx-5 mb-6 bg-white rounded-2xl shadow-xl`}>
           <View style={tw`p-5 items-center`}>
             <Image 
-              source={require('../assets/images/profile.jpg')} 
+              source={require('@/assets/images/profile.jpg')} 
               style={tw`w-32 h-32 rounded-full border-4 border-primary mb-4`}
             />
             <Text style={tw`text-primary text-2xl font-bold`}>{personalInfo.name}</Text>
