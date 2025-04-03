@@ -21,64 +21,65 @@ import tw from '@/utils/tw';
 // Mock data for gallery images
 interface GalleryImage {
   id: string;
-  url: string;
+  image: any; // Using any for image source is common in React Native
   title?: string;
   dateAdded?: string;
   isUploading?: boolean;
 }
 
+// List of mock gallery images using local assets
 const mockImages: GalleryImage[] = [
   {
     id: '1',
-    url: 'https://picsum.photos/501',
+    image: { uri: 'https://picsum.photos/501' },
     title: 'সম্প্রদায় অনুষ্ঠান',
     dateAdded: '2023-10-15'
   },
   {
     id: '2', 
-    url: 'https://picsum.photos/502',
+    image: { uri: 'https://picsum.photos/502' },
     title: 'রাজনৈতিক সমাবেশ',
     dateAdded: '2023-09-22'
   },
   {
     id: '3',
-    url: 'https://picsum.photos/503',
+    image: { uri: 'https://picsum.photos/503' },
     title: 'ফাউন্ডেশন সভা',
     dateAdded: '2023-08-30'
   },
   {
     id: '4',
-    url: 'https://picsum.photos/504',
+    image: { uri: 'https://picsum.photos/504' },
     title: 'শিক্ষামূলক কর্মসূচি',
     dateAdded: '2023-07-12'
   },
   {
     id: '5',
-    url: 'https://picsum.photos/505',
+    image: { uri: 'https://picsum.photos/505' },
     title: 'জনসম্মুখে বক্তব্য',
     dateAdded: '2023-06-05'
   },
   {
     id: '6',
-    url: 'https://picsum.photos/506',
+    image: { uri: 'https://picsum.photos/506' },
     title: 'ফাউন্ডেশন কার্যক্রম',
     dateAdded: '2023-05-18'
   },
   {
     id: '7',
-    url: 'https://picsum.photos/507',
+    image: { uri: 'https://picsum.photos/507' },
     title: 'দল গঠন',
     dateAdded: '2023-04-22'
   },
   {
     id: '8',
-    url: 'https://picsum.photos/508',
+    image: { uri: 'https://picsum.photos/508' },
     title: 'স্বাস্থ্য প্রচারণা',
     dateAdded: '2023-03-15'
   },
   {
     id: '9',
-    url: 'https://picsum.photos/509',
+    image: { uri: 'https://picsum.photos/509' },
     title: 'স্বেচ্ছাসেবক কর্মসূচি',
     dateAdded: '2023-02-08'
   }
@@ -159,7 +160,7 @@ export default function GalleryManagement() {
         // Create a temporary image object with isUploading flag
         const newImage: GalleryImage = {
           id: `temp-${Date.now()}`,
-          url: selectedAsset.uri,
+          image: { uri: selectedAsset.uri }, // Store as uri for uploaded images
           dateAdded: new Date().toISOString().split('T')[0],
           isUploading: true
         };
@@ -199,7 +200,7 @@ export default function GalleryManagement() {
     <View style={tw`w-[48%] bg-white rounded-xl shadow-md overflow-hidden mb-4`}>
       <View style={tw`relative`}>
         <Image 
-          source={{ uri: item.url }} 
+          source={item.image} 
           style={tw`w-full h-40`}
           resizeMode="cover"
         />
@@ -341,7 +342,7 @@ export default function GalleryManagement() {
             
             {selectedImage && (
               <Image 
-                source={{ uri: selectedImage.url }} 
+                source={selectedImage.image} 
                 style={tw`w-full h-40 rounded-lg mb-4`}
                 resizeMode="cover"
               />

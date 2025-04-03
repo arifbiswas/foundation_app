@@ -9,7 +9,7 @@ import {
   ScrollView,
   StatusBar,
 } from 'react-native';
-import Carousel from 'react-native-reanimated-carousel';
+import Carousel, { Pagination } from 'react-native-reanimated-carousel';
 import { Ionicons, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import Marquee from 'react-native-marquee';
@@ -17,7 +17,7 @@ import { router } from 'expo-router';
 import tw from '@/utils/tw';
 import { t, tObj } from "@/utils/i18n";
 
-const { width } = Dimensions.get('window');
+const { width ,height } = Dimensions.get('window');
 
 // Define types for our data
 interface CarouselItem {
@@ -36,16 +36,22 @@ interface GridItem {
 
 // Enhanced carousel data with more images from the gallery directory
 const carouselData: CarouselItem[] = [
-  { id: '1', image: require('@/assets/images/gallery/gallery (1).jpg') },
-  { id: '2', image: require('@/assets/images/gallery/gallery (8).jpg') },
-  { id: '3', image: require('@/assets/images/gallery/gallery (9).jpg') },
-  { id: '4', image: require('@/assets/images/gallery/gallery (11).jpg') },
-  { id: '5', image: require('@/assets/images/gallery/gallery (13).jpg') },
-  { id: '6', image: require('@/assets/images/gallery/gallery (3).jpeg') },
-  { id: '7', image: require('@/assets/images/gallery/gallery (10).jpeg') },
-  { id: '8', image: require('@/assets/images/gallery/gallery (15).jpeg') },
-  { id: '9', image: require('@/assets/images/gallery/gallery (25).jpeg') },
-  { id: '10', image: require('@/assets/images/gallery/gallery (31).jpeg') },
+  { id: '1', image: require('@/assets/images/gallery/1.jpg') },
+  { id: '2', image: require('@/assets/images/gallery/2.jpg') },
+  { id: '3', image: require('@/assets/images/gallery/3.jpg') },
+  { id: '4', image: require('@/assets/images/gallery/4.jpg') },
+  { id: '5', image: require('@/assets/images/gallery/5.jpg') },
+  { id: '6', image: require('@/assets/images/gallery/6.jpg') },
+  { id: '7', image: require('@/assets/images/gallery/7.jpg') },
+  { id: '8', image: require('@/assets/images/gallery/8.jpg') },
+  { id: '9', image: require('@/assets/images/gallery/9.jpg') },
+  { id: '10', image: require('@/assets/images/gallery/10.jpg') },
+  { id: '11', image: require('@/assets/images/gallery/11.jpg') },
+  { id: '12', image: require('@/assets/images/gallery/12.jpg') },
+  { id: '13', image: require('@/assets/images/gallery/13.jpg') },
+  { id: '14', image: require('@/assets/images/gallery/14.jpg') },
+  { id: '15', image: require('@/assets/images/gallery/15.jpg') },
+  
 ];
 
 // Convert grid items from translation
@@ -134,7 +140,7 @@ const announcements = Array.isArray(announcementsFromJson) && announcementsFromJ
 
 export default function HomeScreen() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const carouselHeight = 280;
+    const carouselHeight = height * 0.3;
   const [currentAnnouncement, setCurrentAnnouncement] = useState(0);
 
   // Cycle through announcements
@@ -162,17 +168,29 @@ export default function HomeScreen() {
 
   // Function to render dot indicators
   const renderDotIndicators = () => {
-    return carouselData.map((_, index) => {
-      return (
+    // Show at most 3 dots
+    return (
+      <>
         <View
-          key={index}
           style={[
             tw`w-2 h-2 rounded-full mx-1.5`,
-            index === activeIndex ? tw`bg-primary w-5` : tw`bg-neutral-300`,
+            activeIndex === 0 ? tw`bg-primary w-5` : tw`bg-neutral-300`,
           ]}
         />
-      );
-    });
+        <View
+          style={[
+            tw`w-2 h-2 rounded-full mx-1.5`,
+            activeIndex > 0 && activeIndex < carouselData.length - 1 ? tw`bg-primary w-5` : tw`bg-neutral-300`,
+          ]}
+        />
+        <View
+          style={[
+            tw`w-2 h-2 rounded-full mx-1.5`,
+            activeIndex === carouselData.length - 1 ? tw`bg-primary w-5` : tw`bg-neutral-300`,
+          ]}
+        />
+      </>
+    );
   };
 
   // Function to render the appropriate icon based on iconType
