@@ -31,15 +31,21 @@ interface GridItem {
   icon: string;
   iconType?: string;
   color?: string;
+  customIcon?: any; // Add property for custom icon
 }
 
-// Enhanced carousel data with images only
+// Enhanced carousel data with more images from the gallery directory
 const carouselData: CarouselItem[] = [
   { id: '1', image: require('../assets/images/gallery/gallery (1).jpg') },
-  { id: '2', image: require('../assets/images/gallery/gallery (2).jpg') },
-  { id: '3', image: require('../assets/images/gallery/gallery (3).jpg') },
-  { id: '4', image: require('../assets/images/gallery/gallery (4).jpg') },
-  { id: '5', image: require('../assets/images/gallery/gallery (5).jpg') },
+  { id: '2', image: require('../assets/images/gallery/gallery (8).jpg') },
+  { id: '3', image: require('../assets/images/gallery/gallery (9).jpg') },
+  { id: '4', image: require('../assets/images/gallery/gallery (11).jpg') },
+  { id: '5', image: require('../assets/images/gallery/gallery (13).jpg') },
+  { id: '6', image: require('../assets/images/gallery/gallery (3).jpeg') },
+  { id: '7', image: require('../assets/images/gallery/gallery (10).jpeg') },
+  { id: '8', image: require('../assets/images/gallery/gallery (15).jpeg') },
+  { id: '9', image: require('../assets/images/gallery/gallery (25).jpeg') },
+  { id: '10', image: require('../assets/images/gallery/gallery (31).jpeg') },
 ];
 
 // Convert grid items from translation
@@ -50,16 +56,72 @@ const gridData: GridItem[] = Array.isArray(translatedGridItems) ?
     title: item.title,
     icon: item.icon || 'circle', // Provide fallback icon
     iconType: 'FontAwesome5',
-    color: 'primary'
+    color: 'primary',
+    customIcon: getCustomIconForId(String(index + 1))
   })) : 
   [
-    { id: '1', title: 'আমাদের ফাউন্ডেশন', icon: 'hand-holding-heart', iconType: 'FontAwesome5', color: 'primary' },
-    { id: '2', title: 'ছবি গ্যালারি', icon: 'images', iconType: 'FontAwesome5', color: 'primary' },
-    { id: '3', title: 'রাজনৈতিক কার্যক্রম', icon: 'landmark', iconType: 'FontAwesome5', color: 'primary' },
-    { id: '4', title: 'আমার তথ্য', icon: 'user', iconType: 'FontAwesome5', color: 'primary' },
-    { id: '5', title: 'যোগাযোগ করুন', icon: 'phone-alt', iconType: 'FontAwesome5', color: 'primary' },
-    { id: '6', title: 'স্বেচ্ছাসেবক হন', icon: 'hands-helping', iconType: 'FontAwesome5', color: 'primary' }
+    { 
+      id: '1', 
+      title: 'আমাদের ফাউন্ডেশন', 
+      icon: 'hand-holding-heart', 
+      iconType: 'FontAwesome5', 
+      color: 'primary',
+      customIcon: require('../assets/icons/foundation.png')
+    },
+    { 
+      id: '2', 
+      title: 'ছবি গ্যালারি', 
+      icon: 'images', 
+      iconType: 'FontAwesome5', 
+      color: 'primary',
+      customIcon: require('../assets/icons/gallery.png')
+    },
+    { 
+      id: '3', 
+      title: 'রাজনৈতিক কার্যক্রম', 
+      icon: 'landmark', 
+      iconType: 'FontAwesome5', 
+      color: 'primary',
+      customIcon: require('../assets/icons/politics.png')
+    },
+    { 
+      id: '4', 
+      title: 'আমার তথ্য', 
+      icon: 'user', 
+      iconType: 'FontAwesome5', 
+      color: 'primary',
+      customIcon: require('../assets/icons/userInfo.png')
+    },
+    { 
+      id: '5', 
+      title: 'যোগাযোগ করুন', 
+      icon: 'phone-alt', 
+      iconType: 'FontAwesome5', 
+      color: 'primary',
+      customIcon: require('../assets/icons/contact.png')
+    },
+    { 
+      id: '6', 
+      title: 'স্বেচ্ছাসেবক হন', 
+      icon: 'hands-helping', 
+      iconType: 'FontAwesome5', 
+      color: 'primary',
+      customIcon: require('../assets/icons/volunteer.png')
+    }
   ];
+
+// Helper function to get custom icon based on ID
+function getCustomIconForId(id: string) {
+  switch(id) {
+    case '1': return require('../assets/icons/foundation.png');
+    case '2': return require('../assets/icons/gallery.png');
+    case '3': return require('../assets/icons/politics.png');
+    case '4': return require('../assets/icons/userInfo.png');
+    case '5': return require('../assets/icons/contact.png');
+    case '6': return require('../assets/icons/volunteer.png');
+    default: return null;
+  }
+}
 
 // Announcements for scrolling headline
 const announcementsFromJson = tObj('home.announcements');
@@ -154,7 +216,7 @@ export default function HomeScreen() {
     }
   };
 
-  // Function to render grid items with modern icons
+  // Function to render grid items with custom icons
   const renderGridItem = ({ item }: { item: GridItem }) => {
     return (
       <TouchableOpacity 
@@ -165,8 +227,16 @@ export default function HomeScreen() {
         <View
           style={[tw`p-4 items-center justify-center h-40`, { backgroundColor: '#0A5F52' }]}
         >
-          <View style={tw`w-16 h-16 mb-3 rounded-full bg-white items-center justify-center shadow-md`}>
-            <FontAwesome5 name={item.icon || 'circle'} size={24} color="#0A5F52" />
+          <View style={tw`w-20 h-20 mb-3 rounded-full bg-white items-center justify-center shadow-md`}>
+            {item.customIcon ? (
+              <Image 
+                source={item.customIcon} 
+                style={tw`w-18 h-18`} 
+                resizeMode="contain"
+              />
+            ) : (
+              <FontAwesome5 name={item.icon || 'circle'} size={24} color="#0A5F52" />
+            )}
           </View>
           <Text style={tw`text-center font-bold text-white px-1`} numberOfLines={2}>
             {item.title}

@@ -136,7 +136,7 @@ export default function Politics() {
         <View style={tw`mx-5 mb-6 bg-primary rounded-2xl shadow-xl`}>
           <View style={tw`p-5 items-center`}>
             <Image 
-              source={require('../assets/images/icon.png')} 
+              source={require('../assets/images/profile.jpg')} 
               style={tw`w-32 h-32 rounded-full border-4 border-white mb-4`}
             />
             <Text style={tw`text-white text-2xl font-bold`}>মারুফ হাসান মাসুম</Text>

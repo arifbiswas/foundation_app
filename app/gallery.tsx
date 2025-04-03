@@ -24,20 +24,32 @@ interface GalleryImage {
   title: string;
 }
 
-// Gallery images data with Bengali titles
+// Gallery images data with Bengali titles using images from assets/images/gallery
 const galleryImages: GalleryImage[] = [
   { id: '1', image: require('../assets/images/gallery/gallery (1).jpg'), title: 'সম্প্রদায় অনুষ্ঠান' },
-  { id: '2', image: require('../assets/images/gallery/gallery (2).jpg'), title: 'রাজনৈতিক সমাবেশ' },
-  { id: '3', image: require('../assets/images/gallery/gallery (3).jpg'), title: 'ফাউন্ডেশন সভা' },
-  { id: '4', image: require('../assets/images/gallery/gallery (4).jpg'), title: 'শিক্ষামূলক কর্মসূচি' },
-  { id: '5', image: require('../assets/images/gallery/gallery (5).jpg'), title: 'জনসম্মুখে বক্তব্য' },
-  { id: '6', image: require('../assets/images/icon.png'), title: 'ফাউন্ডেশন লোগো' },
-  { id: '7', image: require('../assets/images/icon.png'), title: 'দল গঠন' },
-  { id: '8', image: require('../assets/images/icon.png'), title: 'স্বাস্থ্য প্রচারণা' },
-  { id: '9', image: require('../assets/images/icon.png'), title: 'স্বেচ্ছাসেবক কর্মসূচি' },
-  { id: '10', image: require('../assets/images/icon.png'), title: 'দাতব্য অনুষ্ঠান' },
-  { id: '11', image: require('../assets/images/icon.png'), title: 'রাজনৈতিক সম্মেলন' },
-  { id: '12', image: require('../assets/images/icon.png'), title: 'সম্প্রদায় সহায়তা' },
+  { id: '2', image: require('../assets/images/gallery/gallery (8).jpg'), title: 'রাজনৈতিক সমাবেশ' },
+  { id: '3', image: require('../assets/images/gallery/gallery (9).jpg'), title: 'ফাউন্ডেশন সভা' },
+  { id: '4', image: require('../assets/images/gallery/gallery (10).jpg'), title: 'শিক্ষামূলক কর্মসূচি' },
+  { id: '5', image: require('../assets/images/gallery/gallery (11).jpg'), title: 'জনসম্মুখে বক্তব্য' },
+  { id: '6', image: require('../assets/images/gallery/gallery (12).jpg'), title: 'ফাউন্ডেশন কার্যক্রম' },
+  { id: '7', image: require('../assets/images/gallery/gallery (13).jpg'), title: 'দল গঠন' },
+  { id: '8', image: require('../assets/images/gallery/gallery (1).jpeg'), title: 'স্বাস্থ্য প্রচারণা' },
+  { id: '9', image: require('../assets/images/gallery/gallery (2).jpeg'), title: 'স্বেচ্ছাসেবক কর্মসূচি' },
+  { id: '10', image: require('../assets/images/gallery/gallery (3).jpeg'), title: 'দাতব্য অনুষ্ঠান' },
+  { id: '11', image: require('../assets/images/gallery/gallery (4).jpeg'), title: 'রাজনৈতিক সম্মেলন' },
+  { id: '12', image: require('../assets/images/gallery/gallery (5).jpeg'), title: 'সম্প্রদায় সহায়তা' },
+  { id: '13', image: require('../assets/images/gallery/gallery (6).jpeg'), title: 'শিশু শিক্ষা কর্মসূচি' },
+  { id: '14', image: require('../assets/images/gallery/gallery (7).jpeg'), title: 'নারী উন্নয়ন প্রকল্প' },
+  { id: '15', image: require('../assets/images/gallery/gallery (8).jpeg'), title: 'গ্রামীণ উন্নয়ন কর্মসূচি' },
+  { id: '16', image: require('../assets/images/gallery/gallery (9).jpeg'), title: 'স্বাস্থ্য শিবির' },
+  { id: '17', image: require('../assets/images/gallery/gallery (10).jpeg'), title: 'খেলাধুলা প্রতিযোগিতা' },
+  { id: '18', image: require('../assets/images/gallery/gallery (11).jpeg'), title: 'সাংস্কৃতিক অনুষ্ঠান' },
+  { id: '19', image: require('../assets/images/gallery/gallery (12).jpeg'), title: 'বৃক্ষরোপণ কর্মসূচি' },
+  { id: '20', image: require('../assets/images/gallery/gallery (13).jpeg'), title: 'পরিবেশ সংরক্ষণ' },
+  { id: '21', image: require('../assets/images/gallery/gallery (14).jpeg'), title: 'যুব উন্নয়ন কর্মসূচি' },
+  { id: '22', image: require('../assets/images/gallery/gallery (15).jpeg'), title: 'দারিদ্র্য বিমোচন' },
+  { id: '23', image: require('../assets/images/gallery/gallery (16).jpeg'), title: 'সেমিনার ও ওয়ার্কশপ' },
+  { id: '24', image: require('../assets/images/gallery/gallery (17).jpeg'), title: 'সম্প্রদায় সচেতনতা' },
 ];
 
 
@@ -80,7 +92,7 @@ export default function Gallery() {
         colors={[String(tw.color('primary-700')), String(tw.color('primary'))]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={tw`pt-14 pb-16 px-5`}
+        style={tw`pt-5 pb-5 px-5`}
       >
         <Text style={tw`text-white text-4xl font-bold`}>{galleryTitle}</Text>
         <Text style={tw`text-white text-base mt-2 opacity-90`}>{gallerySubtitle}</Text>

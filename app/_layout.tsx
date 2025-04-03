@@ -1,6 +1,6 @@
 import { Drawer } from "expo-router/drawer";
 import React, { useCallback, useEffect } from "react";
-import { View, Text, Image, TouchableOpacity, Platform, useColorScheme, useWindowDimensions } from "react-native";
+import { View, Text, Image, TouchableOpacity, Platform, useColorScheme, useWindowDimensions, Linking } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { Ionicons, FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -15,18 +15,68 @@ import { router } from "expo-router";
 SplashScreen.preventAutoHideAsync();
 
 // Social Icon Component
-function SocialIcon({ name }: { name: string }) {
+function SocialIcon({ name, url }: { name: string; url?: string }) {
+  const handlePress = () => {
+    if (url) {
+      // Use Linking API to open external URLs
+      Linking.openURL(url).catch(err => console.error("Couldn't open URL: ", err));
+    }
+  };
+  
   return (
-    <View style={tw`bg-white bg-opacity-90 p-3 rounded-full shadow-sm`}>
-      <FontAwesome5 name={name} size={20} color="#0A5F52" />
-    </View>
+    <TouchableOpacity onPress={handlePress}>
+      <View style={tw`bg-white bg-opacity-90 p-3 rounded-full shadow-sm`}>
+        <FontAwesome5 name={name} size={20} color="#0A5F52" />
+      </View>
+    </TouchableOpacity>
   );
+}
+
+// Custom drawer icon component that uses custom icon images
+function DrawerIcon({ name, size, color }: { name: string, size: number, color: string }) {
+  // Map screen names to custom icon sources
+  const getIconSource = (name: string) => {
+    switch (name) {
+      case 'home':
+        return require('../assets/icons/foundation.png');
+      case 'about':
+        return require('../assets/icons/foundation.png');
+      case 'gallery':
+        return require('../assets/icons/gallery.png');
+      case 'volunteer':
+        return require('../assets/icons/volunteer.png');
+      case 'politics':
+        return require('../assets/icons/politics.png');
+      case 'myinfo':
+        return require('../assets/icons/userInfo.png');
+      case 'contact':
+        return require('../assets/icons/contact.png');
+      default:
+        return null;
+    }
+  };
+
+  const iconSource = getIconSource(name);
+  
+  // If custom icon exists, use it; otherwise fall back to FontAwesome5
+  if (iconSource) {
+    return <Image source={iconSource} style={{ width: size, height: size, }} />;
+  }
+  
+  return <FontAwesome5 name={name} size={size} color={color} />;
 }
 
 // Custom Drawer Content component
 function CustomDrawerContent(props: DrawerContentComponentProps) {
   return (
 <>
+      {/* Login Button - Absolute positioned at top corner */}
+      <TouchableOpacity 
+        style={tw`absolute top-4 left-4 z-10 bg-white bg-opacity-20 p-2 rounded-full`}
+        onPress={() => console.log('Login pressed')}
+      >
+        <FontAwesome5 name="user-lock" size={18} color="white" />
+      </TouchableOpacity>
 
       {/* Top Section with Profile - Using Gradient */}
       <LinearGradient
@@ -47,9 +97,9 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
       
 <DrawerContentScrollView {...props} contentContainerStyle={tw`flex-1`}>
       {/* Navigation Section */}
-      <View style={tw`px-4 pt-4 pb-2`}>
+      {/* <View style={tw`px-4 pt-4 pb-2`}>
         <Text style={tw`uppercase text-neutral-500 font-bold text-xs mb-3`}>{t('common.navigation')}</Text>
-      </View>
+      </View> */}
       <DrawerItemList {...props} />
       
       {/* Support Section */}
@@ -57,25 +107,30 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
         <Text style={tw`font-bold text-base mb-1 text-neutral-800`}>{t('drawer.supportSection.title')}</Text>
         <Text style={tw`text-sm text-neutral-600 mb-3`}>{t('drawer.supportSection.subtitle')}</Text>
         <TouchableOpacity 
-          style={tw`bg-primary py-2 rounded-md flex-row items-center justify-center`}
+          style={tw`bg-primary py-2 gap-2 rounded-md flex-row items-center justify-center`}
           onPress={() => props.navigation.navigate('volunteer')}
         >
-          <FontAwesome5 name="user-plus" size={14} color="white" style={tw`mr-2`} />
+          <FontAwesome5 name="plus" size={20} color="white" />
           <Text style={tw`text-white text-center font-bold`}>{t('common.joinNow')}</Text>
         </TouchableOpacity>
       </View>
     </DrawerContentScrollView>
       
-      {/* Footer/Social Media Section */}
-      <View style={tw`px-4 mt-4 mb-6`}>
-        <Text style={tw`uppercase text-neutral-500 font-bold text-xs mb-3`}>{t('common.followUs')}</Text>
+      {/* Footer/Social Media Section - Using same gradient as profile section */}
+      <LinearGradient
+        colors={['#0A5F52', '#0E8573']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={tw`px-4 pt-4 pb-6`}
+      >
+        <Text style={tw`uppercase text-white font-bold text-xs mb-3`}>{t('common.followUs')}</Text>
         <View style={tw`flex-row justify-between px-4`}>
-          <SocialIcon name="facebook" />
-          <SocialIcon name="twitter" />
-          <SocialIcon name="instagram" />
-          <SocialIcon name="youtube" />
+          <SocialIcon name="facebook" url="https://facebook.com" />
+          <SocialIcon name="twitter" url="https://twitter.com" />
+          <SocialIcon name="instagram" url="https://instagram.com" />
+          <SocialIcon name="youtube" url="https://youtube.com" />
         </View>
-      </View>
+      </LinearGradient>
 </>
   );
 }
@@ -187,8 +242,8 @@ function RootLayoutNav() {
           drawerLabel: getDrawerLabel('home', 'হোম'),
           title: getDrawerLabel('home', 'হোম'),
           drawerIcon: ({ size, color }) => (
-            <FontAwesome5 name="home" size={size} color={color} />
-          )
+            <DrawerIcon name="home" size={size} color={color} />
+          ),
         }}
       />
       <Drawer.Screen
@@ -197,7 +252,7 @@ function RootLayoutNav() {
           drawerLabel: getDrawerLabel('about', 'আমাদের সম্পর্কে'),
           title: getDrawerLabel('about', 'আমাদের সম্পর্কে'),
           drawerIcon: ({ size, color }) => (
-            <FontAwesome5 name="info-circle" size={size} color={color} />
+            <DrawerIcon name="about" size={size} color={color} />
           ),
         }}
       />
@@ -207,7 +262,7 @@ function RootLayoutNav() {
           drawerLabel: getDrawerLabel('gallery', 'গ্যালারি'),
           title: getDrawerLabel('gallery', 'গ্যালারি'),
           drawerIcon: ({ size, color }) => (
-            <FontAwesome5 name="images" size={size} color={color} />
+            <DrawerIcon name="gallery" size={size} color={color} />
           ),
         }}
       />
@@ -217,7 +272,7 @@ function RootLayoutNav() {
           drawerLabel: getDrawerLabel('volunteer', 'স্বেচ্ছাসেবক হন'),
           title: getDrawerLabel('volunteer', 'স্বেচ্ছাসেবক হন'),
           drawerIcon: ({ size, color }) => (
-            <FontAwesome5 name="hands-helping" size={size} color={color} />
+            <DrawerIcon name="volunteer" size={size} color={color} />
           ),
         }}
       />
@@ -227,7 +282,7 @@ function RootLayoutNav() {
           drawerLabel: getDrawerLabel('politics', 'রাজনৈতিক কার্যক্রম'),
           title: getDrawerLabel('politics', 'রাজনৈতিক কার্যক্রম'),
           drawerIcon: ({ size, color }) => (
-            <FontAwesome5 name="landmark" size={size} color={color} />
+            <DrawerIcon name="politics" size={size} color={color} />
           ),
         }}
       />
@@ -237,7 +292,7 @@ function RootLayoutNav() {
           drawerLabel: getDrawerLabel('myinfo', 'আমার তথ্য'),
           title: getDrawerLabel('myinfo', 'আমার তথ্য'),
           drawerIcon: ({ size, color }) => (
-            <FontAwesome5 name="user" size={size} color={color} />
+            <DrawerIcon name="myinfo" size={size} color={color} />
           ),
         }}
       />
@@ -247,7 +302,7 @@ function RootLayoutNav() {
           drawerLabel: getDrawerLabel('contact', 'যোগাযোগ করুন'),
           title: getDrawerLabel('contact', 'যোগাযোগ করুন'),
           drawerIcon: ({ size, color }) => (
-            <FontAwesome5 name="phone-alt" size={size} color={color} />
+            <DrawerIcon name="contact" size={size} color={color} />
           ),
         }}
       />

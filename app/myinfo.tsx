@@ -41,9 +41,11 @@ const personalInfo = {
 // Personal gallery
 const personalGallery: GalleryItem[] = [
   { id: '1', image: require('../assets/images/gallery/gallery (1).jpg') },
-  { id: '2', image: require('../assets/images/gallery/gallery (2).jpg') },
-  { id: '3', image: require('../assets/images/gallery/gallery (3).jpg') },
-  { id: '4', image: require('../assets/images/gallery/gallery (4).jpg') }
+  { id: '2', image: require('../assets/images/gallery/gallery (8).jpg') },
+  { id: '3', image: require('../assets/images/gallery/gallery (9).jpg') },
+  { id: '4', image: require('../assets/images/gallery/gallery (10).jpg') },
+  { id: '5', image: require('../assets/images/gallery/gallery (11).jpg') },
+  { id: '6', image: require('../assets/images/gallery/gallery (1).jpeg') }
 ];
 
 export default function MyInfo() {
