@@ -62,7 +62,7 @@ export default function LoginScreen() {
         colors={['#0A5F52', '#0E8573']}
         style={tw`flex-1`}
       >
-        <ScrollView contentContainerStyle={tw`flex-grow justify-center px-6 pt-20 pb-16`}>
+        <ScrollView contentContainerStyle={tw`flex-grow justify-center px-6 py-16`}>
           {/* Back button */}
           <TouchableOpacity
             style={tw`absolute top-14 left-4 z-10 p-2`}
